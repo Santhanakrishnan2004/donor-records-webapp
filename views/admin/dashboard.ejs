@@ -29,6 +29,7 @@
 <html>
 <head>
   <title>Admin Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
   <h1>Admin Dashboard</h1>
@@ -38,7 +39,7 @@
     <button type="submit">Create Hospital</button>
   </form>
 
-  <h2>Patients</h2>
+  <h2 style="margin-left: 35%;">Patients</h2>
   <% patients.forEach(patient => { %>
     <div>
       <p><%= patient.name %> -<%= patient.bloodgroup %>- <%= patient.phone %> - <%= patient.area %> - <%= patient.status %></p>

@@ -22,6 +22,8 @@ const adminRoutes = require('./routes/admin');
 const hospitalRoutes = require('./routes/hospital');
 const authRoutes = require('./routes/auth');
 app.use(authRoutes);
+app.use(express.static('public'));
+
 
 app.use('/admin', adminRoutes);
 app.use('/hospital', hospitalRoutes);
