@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <form action="/admin/create-hospital" method="POST">
+    <input type="text" name="username" placeholder="Hospital Username" required>
+    <input type="password" name="password" placeholder="Hospital Password" required>
+    <button type="submit">Create Hospital</button>
+  </form>
+
+  <h2>Patients</h2>
+  <% patients.forEach(patient => { %>
+    <div>
+      <p><%= patient.name %> - <%= patient.phone %> - <%= patient.area %> - <%= patient.status %></p>
+      <form action="/admin/accept-patient/<%= patient._id %>" method="POST">
+        <button type="submit">Accept</button>
+      </form>
+      <form action="/admin/delete-patient/<%= patient._id %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <form action="/admin/create-hospital" method="POST">
+    <input type="text" name="username" placeholder="Hospital Username" required>
+    <input type="password" name="password" placeholder="Hospital Password" required>
+    <button type="submit">Create Hospital</button>
+  </form>
+
+  <h2>Patients</h2>
+  <% patients.forEach(patient => { %>
+    <div>
+      <p><%= patient.name %> -<%= patient.bloodgroup %>- <%= patient.phone %> - <%= patient.area %> - <%= patient.status %></p>
+      <% if (patient.status === 'pending') { %>
+        <form action="/admin/accept-patient/<%= patient._id %>" method="POST">
+          <button type="submit">Accept</button>
+        </form>
+      <% } %>
+      <form action="/admin/delete-patient/<%= patient._id %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</body>
+</html>

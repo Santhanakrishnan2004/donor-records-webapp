@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Dashboard</title>
+</head>
+<body>
+  <h1>Hospital Dashboard</h1>
+  <form action="/hospital/upload-patient" method="POST">
+    <input type="text" name="name" placeholder="Patient Name" required>
+    <input type="text" name="bloodgroup" placeholder="bloodgroup Name" required>
+    <input type="text" name="phone" placeholder="Patient Phone" required>
+    <input type="text" name="area" placeholder="Patient Area" required>
+    <button type="submit">Upload Patient</button>
+  </form>
+
+  <h2>Patients</h2>
+  <% patients.forEach(patient => { %>
+    <div>
+      <p><%= patient.name %> -<%= patient.bloodgroup %>-<%= patient.area %>- <%= patient.phone %> - <%= patient.area %> - <%= patient.status %></p>
+    </div>
+  <% }) %>
+</body>
+</html>
