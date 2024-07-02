@@ -86,15 +86,48 @@ const jwt = require('jsonwebtoken');
 const { isAdmin, isAuthenticated } = require('../middleware/auth');
 
 // Admin Dashboard
+// router.get('/dashboard', isAdmin, async (req, res) => {
+//   try {
+//     const patients = await Patient.find({}).populate('createdBy');
+//     res.render('admin/dashboard', { patients });
+//   } catch (err) {
+//     console.error(err);
+//     res.redirect('/login');
+//   }
+// });
+// Admin Dashboard with Search Functionality
 router.get('/dashboard', isAdmin, async (req, res) => {
   try {
-    const patients = await Patient.find({}).populate('createdBy');
+    let query = {};
+
+    // Filter conditions
+    if (req.query.name) {
+      query.name = { $regex: new RegExp(req.query.name, 'i') }; // Case insensitive search
+    }
+    if (req.query.bloodgroup) {
+      query.bloodgroup = req.query.bloodgroup;
+    }
+    if (req.query.phone) {
+      query.phone = { $regex: new RegExp(req.query.phone, 'i') }; // Case insensitive search
+    }
+    if (req.query.area) {
+      query.area = { $regex: new RegExp(req.query.area, 'i') }; // Case insensitive search
+    }
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
+
+    const patients = await Patient.find(query).populate('createdBy');
     res.render('admin/dashboard', { patients });
   } catch (err) {
     console.error(err);
     res.redirect('/login');
   }
 });
+
+
+
+
 
 // Create new hospital account
 router.post('/create-hospital', isAdmin, async (req, res) => {

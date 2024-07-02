@@ -32,6 +32,7 @@
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+  
   <h1>Admin Dashboard</h1>
   <form action="/admin/create-hospital" method="POST">
     <input type="text" name="username" placeholder="Hospital Username" required>
@@ -39,9 +40,37 @@
     <button type="submit">Create Hospital</button>
   </form>
 
+  <div>
+<h2>Search</h2>
+ <form action="/admin/dashboard" method="GET" style="margin-bottom: 20px;">
+  <input type="text" name="name" placeholder="Search by Patient Name">
+  <label for="bloodgroup">Filter by Blood Group:</label>
+    <select name="bloodgroup" id="bloodgroup">
+      <option value="">All Blood Groups</option>
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+    </select>
+  <input type="text" name="phone" placeholder="Search by Phone">
+  <input type="text" name="area" placeholder="Search by Area">
+  <select name="status">
+    <option value="">All Status</option>
+    <option value="pending">Pending</option>
+    <option value="approved">Approved</option>
+    <option value="rejected">Rejected</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
+</div>
+
   <h2 style="margin-left: 35%;">Patients</h2>
   <% patients.forEach(patient => { %>
-    <div>
+    <div class="from">
       <p><%= patient.name %> -<%= patient.bloodgroup %>- <%= patient.phone %> - <%= patient.area %> - <%= patient.status %></p>
       <% if (patient.status === 'pending') { %>
         <form action="/admin/accept-patient/<%= patient._id %>" method="POST">
